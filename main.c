@@ -6,6 +6,7 @@
 #include <SDL/SDL_mixer.h>
 #include "head.h"
 int main(int argc, char * argv){
+	
 	int x =0;
 	int y =0;
 	int vc = 11;
@@ -18,20 +19,19 @@ int main(int argc, char * argv){
 	SDL_Rect startpos;
 	SDL_Rect Sprite[2];
         SDL_Rect logopos;
-	
-	
+
 	SDL_Rect setpos;
 	
 	
-	TTF_Font *police = TTF_OpenFont("Distorted.ttf",65);
+	TTF_Font * police = TTF_OpenFont("Distorted.ttf",60);
 	TTF_Font * policeset = TTF_OpenFont("Distorted.ttf",65);
 	SDL_Surface * start = NULL;
 	SDL_Surface * settings = NULL;
 	SDL_Surface* settingsback = NULL;
 	SDL_Surface* volumebarf = NULL;
-	
-	Mix_Music *music = Mix_LoadMUS("nostalgia.mp3");
-	Mix_FadeInMusic(music,-1,149);
+	Mix_Chunk * bref= Mix_LoadWAV("button.wav");
+	Mix_Music * music = Mix_LoadMUS("gamesound.mp3");
+	Mix_FadeInMusic(music,-1,132);
 	
 	int curscre = 0;
 	
@@ -39,8 +39,8 @@ int main(int argc, char * argv){
 	int cont = 0;
 	int i =0;
 	int ic;
-	SDL_Surface * logo = NULL;
-	SDL_Surface * soundchar;
+	SDL_Surface * logo=NULL;
+	SDL_Surface * soundchar=NULL;
 	SDL_Rect soundcharp;
 	SDL_Rect mainmexitp;
 	
@@ -93,6 +93,8 @@ int main(int argc, char * argv){
 	volumebarf = IMG_Load("rsz_soundcaseblank.jpg");
 	SDL_Surface * volumebarff = IMG_Load("rsz_soundcase.jpg");
 	SDL_Surface * mainmexit = IMG_Load("exit.png");
+	
+	
 	backg(background, screen);
 	
 	
@@ -103,16 +105,22 @@ int main(int argc, char * argv){
 	
 	case 0:
 	screen = SDL_SetVideoMode(1650,800,32, SDL_DOUBLEBUF | SDL_HWSURFACE);
-	cc =mainmenuf(curscre, change, screen, police, policeset,start,settings,  startpos, setpos, i, logo, Sprite,logopos,background, event, cont,mainmexit,mainmexitp);
+	
+	cc =mainmenuf(curscre, change, screen, police, policeset,start,settings,  startpos, setpos, i, logo, Sprite,logopos,background, event, cont,mainmexit,mainmexitp,bref);
+	
+       printf("%d cc",cc);
+					
 	curscre = 1;
 	
 	break;
 	
 	
 	
+	
 	case 1:
 	
 	SDL_FreeSurface(screen);
+	
 	screen = SDL_SetVideoMode(1650,800,32, SDL_DOUBLEBUF | SDL_HWSURFACE );
 	printf("Cur screen %d\n", curscre);
 	
@@ -122,9 +130,9 @@ int main(int argc, char * argv){
 	
 	
 
-		
-	}
 	
+	}
+	if(cc==0){break;}
 	printf("Still in maingame\n");
 	}
 
